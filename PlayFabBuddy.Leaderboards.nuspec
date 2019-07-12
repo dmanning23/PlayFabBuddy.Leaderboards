@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>PlayFabBuddy.Leaderboards</id>
+		<version>2.0.1</version>
+		<title>PlayFabBuddy.Leaderboards</title>
+		<authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/PlayFabBuddy.Leaderboards</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/PlayFabBuddy.Leaderboards/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Leaderboards wrapper around the PlayFab Xamarin client SDK</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>android, ios, windows universal, monogame, xamarin</tags>
+		<dependencies>
+
+			<!--Xamarin.Android-->
+			<group targetFramework="MonoAndroid10">
+				<dependency id="PlayFabBuddy.Core" version="2.0"/>
+				<dependency id="PlayFabBuddy.Auth" version="2.0"/>
+			</group>
+
+			<!--Xamarin.iOS Unified-->
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="PlayFabBuddy.Core" version="2.0"/>
+				<dependency id="PlayFabBuddy.Auth" version="2.0"/>
+			</group>
+
+
+			<group targetFramework="net451">
+				<dependency id="PlayFabBuddy.Core" version="2.0"/>
+				<dependency id="PlayFabBuddy.Auth" version="2.0"/>
+			</group>
+
+		</dependencies>
+	</metadata>
+	<files>
+
+		<!--Xamarin.Android-->
+		<file src="PlayFabBuddy.Leaderboards.Android\bin\Release\PlayFabBuddy.Leaderboards.Android.pdb" target="lib\MonoAndroid10\PlayFabBuddy.Leaderboards.Android.pdb" />
+		<file src="PlayFabBuddy.Leaderboards.Android\bin\Release\PlayFabBuddy.Leaderboards.Android.dll" target="lib\MonoAndroid10\PlayFabBuddy.Leaderboards.Android.dll" />
+
+		<!--Xamarin.iOS Unified-->
+		<file src="PlayFabBuddy.Leaderboards.iOS\bin\Release\PlayFabBuddy.Leaderboards.iOS.pdb" target="lib\Xamarin.iOS10\PlayFabBuddy.Leaderboards.iOS.pdb" />
+		<file src="PlayFabBuddy.Leaderboards.iOS\bin\Release\PlayFabBuddy.Leaderboards.iOS.dll" target="lib\Xamarin.iOS10\PlayFabBuddy.Leaderboards.iOS.dll" />
+		
+		<!--WindowsDX-->
+		<file src="PlayFabBuddy.Leaderboards.WindowsDX\bin\Release\PlayFabBuddy.Leaderboards.WindowsDX.pdb" target="lib\net451\PlayFabBuddy.Leaderboards.WindowsDX.pdb" />
+		<file src="PlayFabBuddy.Leaderboards.WindowsDX\bin\Release\PlayFabBuddy.Leaderboards.WindowsDX.dll" target="lib\net451\PlayFabBuddy.Leaderboards.WindowsDX.dll" />
+
+	</files>
+</package>

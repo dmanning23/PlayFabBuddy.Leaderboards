@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2c406774-0416-485c-be50-aca4416f9915</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PlayFabBuddy.Leaderboards</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPlayFabLeaderboardService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayFabLeaderboardService.cs" />
+  </ItemGroup>
+</Project>
