@@ -1,11 +1,10 @@
 ﻿using PlayFab.ClientModels;
-using PlayFabBuddyLib;
 using PlayFabBuddyLib.Auth;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlayFabBuddy.Leaderboards
+namespace PlayFabBuddyLib.Leaderboards
 {
 	public class PlayFabLeaderboardService : IPlayFabLeaderboardService
 	{
@@ -18,12 +17,27 @@ namespace PlayFabBuddy.Leaderboards
 
 		#region Methods
 
-		#endregion //Methods
-
 		public PlayFabLeaderboardService(IPlayFabClient playfab, IPlayFabAuthService auth)
 		{
 			_playfab = playfab;
 			_auth = auth;
+		}
+
+		public async Task<int> GetHighScore(string highScoreList)
+		{
+			var result = await _playfab.GetPlayerStatisticsAsync(new GetPlayerStatisticsRequest()
+			{
+				StatisticNames = new List<string> { highScoreList }
+			});
+
+			if (result.Error != null)
+			{
+				//An error occurred
+				return 0;
+			}
+
+			var stat = result.Result.Statistics.FirstOrDefault(x => x.StatisticName == highScoreList);
+			return (stat?.Value ?? 0);
 		}
 
 		public async Task<bool> IsHighScore(string highScoreList, int points)
@@ -45,26 +59,17 @@ namespace PlayFabBuddy.Leaderboards
 
 		public async Task<bool> AddHighScore(string highScoreList, int points)
 		{
-			var isHighScore = await IsHighScore(highScoreList, points);
-
-			if (!isHighScore)
+			var result = await _playfab.UpdatePlayerStatisticsAsync(new UpdatePlayerStatisticsRequest()
 			{
-				return false;
-			}
-			else
-			{
-				var result = await _playfab.UpdatePlayerStatisticsAsync(new UpdatePlayerStatisticsRequest()
-				{
-					Statistics = new List<StatisticUpdate> {
-						new StatisticUpdate() {
-							StatisticName = highScoreList,
-							Value = points,
-						}
+				Statistics = new List<StatisticUpdate> {
+					new StatisticUpdate() {
+						StatisticName = highScoreList,
+						Value = points,
 					}
-				});
+				}
+			});
 
-				return (result.Error == null);
-			}
+			return (result.Error == null);
 		}
 
 		public async Task<IEnumerable<LeaderboardItem>> GetLeaderboard(string highScoreList, int num = 10)
@@ -143,5 +148,7 @@ namespace PlayFabBuddy.Leaderboards
 		{
 			return entries.Select(x => new LeaderboardItem(x.DisplayName, x.Position, x.StatValue)).ToList();
 		}
+
+		#endregion //Methods
 	}
 }

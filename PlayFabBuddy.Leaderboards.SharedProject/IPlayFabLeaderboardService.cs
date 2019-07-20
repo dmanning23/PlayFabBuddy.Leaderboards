@@ -1,10 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PlayFabBuddy.Leaderboards
+namespace PlayFabBuddyLib.Leaderboards
 {
 	public interface IPlayFabLeaderboardService
 	{
+		/// <summary>
+		/// Get the player's current high score
+		/// </summary>
+		/// <param name="highScoreList">The name of the list to check</param>
+		/// <returns>The player's current high score.</returns>
+		Task<int> GetHighScore(string highScoreList);
+
 		/// <summary>
 		/// Check if the player got a high score 
 		/// </summary>

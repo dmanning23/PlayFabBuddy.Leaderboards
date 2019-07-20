@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlayFabBuddy.Leaderboards
+﻿
+namespace PlayFabBuddyLib.Leaderboards
 {
 	/// <summary>
 	/// A single item in the leaderboard.
