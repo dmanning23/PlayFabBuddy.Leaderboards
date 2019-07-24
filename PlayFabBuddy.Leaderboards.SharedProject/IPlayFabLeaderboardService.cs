@@ -21,12 +21,12 @@ namespace PlayFabBuddyLib.Leaderboards
 		Task<bool> IsHighScore(string highScoreList, int points);
 
 		/// <summary>
-		/// Update the player's score if they got a highscore.
+		/// Update the player's leaderboard stat.
 		/// </summary>
 		/// <param name="highScoreList">The name of the list to check</param>
 		/// <param name="points">The number of points the player got this round</param>
-		/// <returns>True if the player's score was updated. False if the number of points is less than their current high score.</returns>
-		Task<bool> AddHighScore(string highScoreList, int points);
+		/// <returns>True if the player's score was updated, false if an error occurred.</returns>
+		Task<bool> SetStat(string highScoreList, int points);
 
 		/// <summary>
 		/// Get a leaderboard.

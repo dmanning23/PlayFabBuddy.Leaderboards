@@ -1,5 +1,6 @@
 ﻿using PlayFab.ClientModels;
 using PlayFabBuddyLib.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,19 +26,26 @@ namespace PlayFabBuddyLib.Leaderboards
 
 		public async Task<int> GetHighScore(string highScoreList)
 		{
-			var result = await _playfab.GetPlayerStatisticsAsync(new GetPlayerStatisticsRequest()
+			try
 			{
-				StatisticNames = new List<string> { highScoreList }
-			});
+				var result = await _playfab.GetPlayerStatisticsAsync(new GetPlayerStatisticsRequest()
+				{
+					StatisticNames = new List<string> { highScoreList },
+				});
 
-			if (result.Error != null)
-			{
-				//An error occurred
-				return 0;
+				if (result.Error != null)
+				{
+					//An error occurred
+					return 0;
+				}
+
+				var stat = result.Result.Statistics.FirstOrDefault(x => x.StatisticName == highScoreList);
+				return (stat?.Value ?? 0);
 			}
-
-			var stat = result.Result.Statistics.FirstOrDefault(x => x.StatisticName == highScoreList);
-			return (stat?.Value ?? 0);
+			catch (Exception ex)
+			{
+			}
+			return 0;
 		}
 
 		public async Task<bool> IsHighScore(string highScoreList, int points)
@@ -57,7 +65,7 @@ namespace PlayFabBuddyLib.Leaderboards
 			return (null != stat && stat.Value < points);
 		}
 
-		public async Task<bool> AddHighScore(string highScoreList, int points)
+		public async Task<bool> SetStat(string highScoreList, int points)
 		{
 			var result = await _playfab.UpdatePlayerStatisticsAsync(new UpdatePlayerStatisticsRequest()
 			{
