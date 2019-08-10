@@ -42,7 +42,7 @@ namespace PlayFabBuddyLib.Leaderboards
 				var stat = result.Result.Statistics.FirstOrDefault(x => x.StatisticName == highScoreList);
 				return (stat?.Value ?? 0);
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 			}
 			return 0;
@@ -106,7 +106,7 @@ namespace PlayFabBuddyLib.Leaderboards
 				StatisticName = highScoreList,
 			});
 
-			if (null != result.Error)
+			if (null == result.Error)
 			{
 				return PopulateLeaderboardItems(result.Result.Leaderboard);
 			}
@@ -124,7 +124,7 @@ namespace PlayFabBuddyLib.Leaderboards
 				StatisticName = highScoreList,
 			});
 
-			if (null != result.Error)
+			if (null == result.Error)
 			{
 				return PopulateLeaderboardItems(result.Result.Leaderboard);
 			}
